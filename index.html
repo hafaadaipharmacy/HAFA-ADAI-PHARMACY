@@ -844,7 +844,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     <input type="hidden" id="med-edit-index">
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addMedModal')">Cancel</button>
-      <button class="btn btn-primary" id="medSaveBtn" onclick="saveMedicine()">➕ Add Medicine</button>
+      <button class="btn btn-primary" id="medSaveBtn" onclick="saveMedicine()">➕ Add Product</button>
     </div>
   </div>
 </div>
@@ -1239,7 +1239,7 @@ function updateBadges(){
 function renderInventory(data){
   const tb=document.getElementById('invTbody');
   if(data.length===0){
-    tb.innerHTML='<tr><td colspan="9"><div class="empty-state" style="padding:28px"><span class="es-icon">📦</span><h3>No Medicines Added</h3><p>Click "Add Medicine" to get started</p></div></td></tr>';
+    tb.innerHTML='<tr><td colspan="9"><div class="empty-state" style="padding:28px"><span class="es-icon">📦</span><h3>No Medicines Added</h3><p>Click "Add Product" to get started</p></div></td></tr>';
     document.getElementById('inv-total-count').textContent='0';
     document.getElementById('inv-low-count').textContent='0';
     document.getElementById('inv-exp-count').textContent='0';
@@ -1298,8 +1298,8 @@ function sortInventory(){
   renderInventory(DB.inventory);
 }
 function openAddMedModal(){
-  document.getElementById('addMedTitle').textContent='➕ Add New Medicine';
-  document.getElementById('medSaveBtn').textContent='➕ Add Medicine';
+  document.getElementById('addMedTitle').textContent='➕ Add New Product';
+  document.getElementById('medSaveBtn').textContent='➕ Add Product';
   ['med-name','med-batch','med-icon'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('med-cat').value='';
   document.getElementById('med-stock').value='';
