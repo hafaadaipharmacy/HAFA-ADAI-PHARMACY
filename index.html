@@ -1248,7 +1248,7 @@ function renderInventory(data){
     return;
   }
   const catColors={Antibiotic:'b',Diabetes:'o',Cardiovascular:'r','Pain Reliever':'b',Allergy:'g',Gastroenterology:'b','Vitamin/Supplement':'g',Respiratory:'b',Dermatology:'p',Other:'b'};
-  tb.innerHTML=data.map((item,i)=>{
+ tb.innerHTML=data.map((item,i)=>{
     const realIdx=DB.inventory.indexOf(item);
     const isLow=item.stock<=(item.alertAt||10);
     const expiryInfo=getExpiryInfo(item.expiry);
@@ -1266,6 +1266,7 @@ function renderInventory(data){
         <button class="btn btn-outline btn-sm" onclick="openEditMedModal(${realIdx})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
       </div></td>
+
     </tr>`;
   }).join('');
   // stats
