@@ -372,7 +372,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
 <!-- ══ DASHBOARD ══ -->
 <div class="page active" id="page-dashboard">
   <div class="kpi-grid">
-    <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="kpi-sales">$0</div><div class="kpi-label">Today's Sales</div><div class="kpi-change warn" id="kpi-sales-ch">No sales yet</div></div>
+    <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="kpi-sales">₱0</div><div class="kpi-label">Today's Sales</div><div class="kpi-change warn" id="kpi-sales-ch">No sales yet</div></div>
     <div class="kpi green"><div class="kpi-icon">🧾</div><div class="kpi-value" id="kpi-txn">0</div><div class="kpi-label">Transactions Today</div><div class="kpi-change up" id="kpi-txn-ch">—</div></div>
     <div class="kpi red"><div class="kpi-icon">📦</div><div class="kpi-value" id="kpi-low">0</div><div class="kpi-label">Low Stock Items</div><div class="kpi-change down" id="kpi-low-ch">—</div></div>
     <div class="kpi orange"><div class="kpi-icon">⏳</div><div class="kpi-value" id="kpi-rx">0</div><div class="kpi-label">Pending Rx</div><div class="kpi-change warn" id="kpi-rx-ch">—</div></div>
@@ -427,11 +427,11 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
           <input class="form-input" id="discCode" style="font-size:12.5px;padding:7px 10px" placeholder="Discount code or % amount…">
           <button class="btn btn-outline btn-sm" onclick="applyDiscount()">Apply</button>
         </div>
-        <div class="cr"><span class="cr-lbl">Subtotal</span><span class="cr-val" id="pos-subtotal">$0.00</span></div>
-        <div class="cr"><span class="cr-lbl">Discount</span><span class="cr-val" style="color:var(--green)" id="pos-discount">−$0.00</span></div>
-        <div class="cr"><span class="cr-lbl">Tax (12%)</span><span class="cr-val" id="pos-tax">$0.00</span></div>
+        <div class="cr"><span class="cr-lbl">Subtotal</span><span class="cr-val" id="pos-subtotal">₱0.00</span></div>
+        <div class="cr"><span class="cr-lbl">Discount</span><span class="cr-val" style="color:var(--green)" id="pos-discount">−₱0.00</span></div>
+        <div class="cr"><span class="cr-lbl">Tax (12%)</span><span class="cr-val" id="pos-tax">₱0.00</span></div>
         <div class="divider"></div>
-        <div class="cr"><span style="font-size:13px;font-weight:700">Total</span><span style="font-size:20px;font-weight:800;color:var(--gray-800)" id="pos-total">$0.00</span></div>
+        <div class="cr"><span style="font-size:13px;font-weight:700">Total</span><span style="font-size:20px;font-weight:800;color:var(--gray-800)" id="pos-total">₱0.00</span></div>
         <div class="pay-methods" style="margin-top:10px">
           <button class="pay-btn active" id="pay-cash" onclick="setPayMethod('cash')"><span class="pay-icon">💵</span>Cash</button>
           <button class="pay-btn" id="pay-card" onclick="setPayMethod('card')"><span class="pay-icon">💳</span>Card</button>
@@ -439,7 +439,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
           <button class="pay-btn" id="pay-ew" onclick="setPayMethod('ew')"><span class="pay-icon">📱</span>E-Wallet</button>
         </div>
         <div style="display:flex;gap:7px">
-          <button class="checkout-btn" onclick="checkout()" style="flex:1">✅ Complete Sale — <span id="pos-total-btn">$0.00</span></button>
+          <button class="checkout-btn" onclick="checkout()" style="flex:1">✅ Complete Sale — <span id="pos-total-btn">₱0.00</span></button>
           <button class="btn btn-outline" onclick="printReceipt()" title="Print Receipt" style="padding:0 12px;font-size:18px">🖨️</button>
         </div>
       </div>
@@ -471,7 +471,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px"><span style="font-size:26px">📦</span><div><div style="font-size:19px;font-weight:800" id="inv-total-count">0</div><div style="font-size:11px;color:var(--gray-400)">Total Products</div></div></div>
     <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-left:3px solid var(--red)"><span style="font-size:26px">🔴</span><div><div style="font-size:19px;font-weight:800;color:var(--red)" id="inv-low-count">0</div><div style="font-size:11px;color:var(--gray-400)">Low Stock Items</div></div></div>
     <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-left:3px solid var(--orange)"><span style="font-size:26px">⏰</span><div><div style="font-size:19px;font-weight:800;color:var(--orange)" id="inv-exp-count">0</div><div style="font-size:11px;color:var(--gray-400)">Expiring in 30d</div></div></div>
-    <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-left:3px solid var(--green)"><span style="font-size:26px">✅</span><div><div style="font-size:19px;font-weight:800;color:var(--green)" id="inv-val">$0</div><div style="font-size:11px;color:var(--gray-400)">Inventory Value</div></div></div>
+    <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-left:3px solid var(--green)"><span style="font-size:26px">✅</span><div><div style="font-size:19px;font-weight:800;color:var(--green)" id="inv-val">₱0</div><div style="font-size:11px;color:var(--gray-400)">Inventory Value</div></div></div>
   </div>
   <div class="table-wrap">
     <div class="table-hdr">
@@ -593,8 +593,8 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
   <!-- SALES TAB -->
   <div class="rep-section active" id="rep-sales">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px">
-      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rep-revenue">$0</div><div class="kpi-label">Revenue</div></div>
-      <div class="kpi green"><div class="kpi-icon">📈</div><div class="kpi-value" id="rep-profit">$0</div><div class="kpi-label">Gross Profit</div></div>
+      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rep-revenue">₱0</div><div class="kpi-label">Revenue</div></div>
+      <div class="kpi green"><div class="kpi-icon">📈</div><div class="kpi-value" id="rep-profit">₱0</div><div class="kpi-label">Gross Profit</div></div>
       <div class="kpi purple"><div class="kpi-icon">🧾</div><div class="kpi-value" id="rep-txns">0</div><div class="kpi-label">Transactions</div></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px">
@@ -625,7 +625,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
       <div class="kpi blue"><div class="kpi-icon">📦</div><div class="kpi-value" id="riv-total">0</div><div class="kpi-label">Total Products</div></div>
       <div class="kpi red"><div class="kpi-icon">🔴</div><div class="kpi-value" id="riv-low">0</div><div class="kpi-label">Low Stock</div></div>
       <div class="kpi orange"><div class="kpi-icon">⏰</div><div class="kpi-value" id="riv-exp">0</div><div class="kpi-label">Expiring 30d</div></div>
-      <div class="kpi green"><div class="kpi-icon">💵</div><div class="kpi-value" id="riv-val">$0</div><div class="kpi-label">Stock Value</div></div>
+      <div class="kpi green"><div class="kpi-icon">💵</div><div class="kpi-value" id="riv-val">₱0</div><div class="kpi-label">Stock Value</div></div>
     </div>
     <div class="table-wrap">
       <div class="table-hdr"><div class="card-title">Inventory Status Report</div></div>
@@ -641,9 +641,9 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
   <!-- FINANCIAL TAB -->
   <div class="rep-section" id="rep-financial">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px">
-      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rf-rev">$0</div><div class="kpi-label">Total Revenue</div></div>
-      <div class="kpi red"><div class="kpi-icon">📉</div><div class="kpi-value" id="rf-cost">$0</div><div class="kpi-label">Total Cost</div></div>
-      <div class="kpi green"><div class="kpi-icon">✅</div><div class="kpi-value" id="rf-net">$0</div><div class="kpi-label">Net Profit</div></div>
+      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rf-rev">₱0</div><div class="kpi-label">Total Revenue</div></div>
+      <div class="kpi red"><div class="kpi-icon">📉</div><div class="kpi-value" id="rf-cost">₱0</div><div class="kpi-label">Total Cost</div></div>
+      <div class="kpi green"><div class="kpi-icon">✅</div><div class="kpi-value" id="rf-net">₱0</div><div class="kpi-label">Net Profit</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div class="card">
@@ -799,10 +799,10 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     <tbody id="r-items"></tbody>
   </table>
   <div class="rt">
-    <div class="rt-row"><span>Subtotal</span><span id="r-subtotal">$0.00</span></div>
-    <div class="rt-row"><span>Discount</span><span id="r-discount">-$0.00</span></div>
-    <div class="rt-row"><span id="r-taxlbl">Tax (5%)</span><span id="r-tax">$0.00</span></div>
-    <div class="rt-row rt-total"><span>TOTAL</span><span id="r-total">$0.00</span></div>
+    <div class="rt-row"><span>Subtotal</span><span id="r-subtotal">₱0.00</span></div>
+    <div class="rt-row"><span>Discount</span><span id="r-discount">-₱0.00</span></div>
+    <div class="rt-row"><span id="r-taxlbl">Tax (5%)</span><span id="r-tax">₱0.00</span></div>
+    <div class="rt-row rt-total"><span>TOTAL</span><span id="r-total">₱0.00</span></div>
     <div class="rt-row" style="margin-top:6px"><span>Payment</span><span id="r-payment">Cash</span></div>
   </div>
   <div class="rf">
@@ -832,8 +832,8 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
       <div class="form-group"><label class="form-label">Expiry Date</label><input class="form-input" id="med-expiry" type="date"></div>
       <div class="form-group"><label class="form-label">Stock Quantity *</label><input class="form-input" id="med-stock" type="number" placeholder="0" min="0"></div>
       <div class="form-group"><label class="form-label">Low Stock Alert (units)</label><input class="form-input" id="med-alert" type="number" placeholder="10" min="0"></div>
-      <div class="form-group"><label class="form-label">Purchase Price ($) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
-      <div class="form-group"><label class="form-label">Selling Price ($) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Purchase Price (₱) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Selling Price (₱) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
     </div>
     <div class="form-group"><label class="form-label">Supplier</label><select class="form-input" id="med-supplier"><option value="">Select supplier</option></select></div>
     <div class="form-group"><label class="form-label">Product Emoji Icon</label><input class="form-input" id="med-icon" placeholder="e.g. 💊 🟡 💙" maxlength="4" style="font-size:20px"></div>
@@ -932,7 +932,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     </div>
     <div class="form-group"><label class="form-label">Items / Description</label><textarea class="form-input" id="po-items" rows="3" placeholder="e.g., Amoxicillin 500mg × 100, Paracetamol × 200" style="resize:vertical"></textarea></div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Total Amount ($)</label><input class="form-input" id="po-total" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Total Amount (₱)</label><input class="form-input" id="po-total" type="number" placeholder="0.00" step="0.01"></div>
       <div class="form-group"><label class="form-label">Invoice / PO Ref #</label><input class="form-input" id="po-ref" placeholder="Auto-generated if blank"></div>
     </div>
     <input type="hidden" id="po-edit-index">
@@ -1175,7 +1175,7 @@ function renderDashboard(){
   const lowStock=DB.inventory.filter(i=>i.stock<=(i.alertAt||10));
   const pendingRx=DB.prescriptions.filter(r=>r.status==='pending');
 
-  document.getElementById('kpi-sales').textContent='$'+todaySales.toFixed(2);
+  document.getElementById('kpi-sales').textContent='₱'+todaySales.toFixed(2);
   document.getElementById('kpi-txn').textContent=todayTxns.length;
   document.getElementById('kpi-low').textContent=lowStock.length;
   document.getElementById('kpi-rx').textContent=pendingRx.length;
@@ -1199,12 +1199,12 @@ function renderDashboard(){
   }
   const maxW=Math.max(...week.map(w=>w.amt),1);
   const wTotal=week.reduce((s,w)=>s+w.amt,0);
-  document.getElementById('dash-week-total').textContent='$'+wTotal.toFixed(2);
+  document.getElementById('dash-week-total').textContent='₱'+wTotal.toFixed(2);
   document.getElementById('dash-week-lbl').textContent=week[0].ds+' – '+week[6].ds;
   const chart=document.getElementById('dashChart');
   const lbls=document.getElementById('dashChartLbls');
-  chart.innerHTML=week.map(w=>`<div class="ch-bar" style="height:${Math.max(4,(w.amt/maxW)*130)}px" title="${w.label}: $${w.amt.toFixed(2)}"></div>`).join('');
-  lbls.innerHTML=week.map(w=>`<span>${w.label}</span>`).join('');
+  chart.innerHTML=week.map(w=>`<div class="ch-bar" style="height:₱{Math.max(4,(w.amt/maxW)*130)}px" title="₱{w.label}: ₱₱{w.amt.toFixed(2)}"></div>`).join('');
+  lbls.innerHTML=week.map(w=>`<span>₱{w.label}</span>`).join('');
 
   // Alerts
   const al=document.getElementById('dashAlerts');
@@ -1220,7 +1220,7 @@ function renderDashboard(){
   const rt=document.getElementById('dashRecentTxns');
   const recent=DB.transactions.slice(-5).reverse();
   if(recent.length===0){rt.innerHTML='<div class="empty-state" style="padding:18px"><span class="es-icon" style="font-size:28px">💳</span><p>No transactions yet</p></div>';}
-  else{rt.innerHTML='<table class="data-table"><thead><tr><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody>'+recent.map(t=>`<tr><td><b>${t.customer||'Walk-in'}</b><br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-weight:700;color:var(--blue)">$${t.total.toFixed(2)}</td><td><span class="sp g">✓ ${t.payment}</span></td></tr>`).join('')+'</tbody></table>';}
+  else{rt.innerHTML='<table class="data-table"><thead><tr><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody>'+recent.map(t=>`<tr><td><b>${t.customer||'Walk-in'}</b><br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-weight:700;color:var(--blue)">$${t.total.toFixed(2)}</td><td><span class="sp g">✓ ₱{t.payment}</span></td></tr>`).join('')+'</tbody></table>';}
   updateBadges();
 }
 
@@ -1242,7 +1242,7 @@ function renderInventory(data){
     document.getElementById('inv-total-count').textContent='0';
     document.getElementById('inv-low-count').textContent='0';
     document.getElementById('inv-exp-count').textContent='0';
-    document.getElementById('inv-val').textContent='$0';
+    document.getElementById('inv-val').textContent='₱0';
     document.getElementById('invSubtitle').textContent='0 items';
     return;
   }
@@ -1257,10 +1257,10 @@ function renderInventory(data){
       <td>${item.expiry?`<span class="etag ${expiryInfo.cls}">${expiryInfo.lbl}</span>`:'—'}</td>
       <td style="${isLow?'color:var(--red);font-weight:700':''}"><b>${item.stock}</b> units${isLow?' ⚠':''}
       </td>
-      <td>$${(item.buy||0).toFixed(2)}</td>
-      <td style="font-weight:700;color:var(--blue)">$${(item.sell||0).toFixed(2)}</td>
-      <td>${item.supplier||'—'}</td>
-      <td>${item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
+      <td>₱₱{(item.buy||0).toFixed(2)}</td>
+      <td style="font-weight:700;color:var(--blue)">₱₱{(item.sell||0).toFixed(2)}</td>
+      <td>₱{item.supplier||'—'}</td>
+      <td>₱{item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
       <td><div style="display:flex;gap:5px;flex-wrap:nowrap">
         <button class="btn btn-outline btn-sm" onclick="openEditMedModal(${realIdx})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
@@ -1395,12 +1395,12 @@ function renderProductGrid(cat){
   grid.innerHTML=items.map((item,_)=>{
     const ri=DB.inventory.indexOf(item);
     const isLow=item.stock<=(item.alertAt||10);
-    return`<div class="product-card${item.rx?' rx-flag':''}" onclick="addToCart(${ri})">
-      <div class="p-icon">${item.icon||'💊'}</div>
-      <div class="p-name">${item.name}</div>
-      <div class="p-cat">${item.cat||'General'}</div>
-      <div class="p-price">$${(item.sell||0).toFixed(2)}</div>
-      <div class="p-stock ${isLow?'low':'ok'}">${isLow?'⚠ Low: ':'✓ '}${item.stock} in stock</div>
+    return`<div class="product-card${item.rx?' rx-flag':''}" onclick="addToCart(₱{ri})">
+      <div class="p-icon">₱{item.icon||'💊'}</div>
+      <div class="p-name">₱{item.name}</div>
+      <div class="p-cat">₱{item.cat||'General'}</div>
+      <div class="p-price">₱₱{(item.sell||0).toFixed(2)}</div>
+      <div class="p-stock ₱{isLow?'low':'ok'}">₱{isLow?'⚠ Low: ':'✓ '}₱{item.stock} in stock</div>
     </div>`;
   }).join('');
 }
@@ -1443,7 +1443,7 @@ function renderCart(){
   let html='';
   if(activeCart.some(c=>c.rx))html+=`<div style="display:flex;align-items:center;gap:7px;padding:8px 16px;background:var(--orange-light);border-bottom:1px solid var(--gray-100)"><span>🏷️</span><span style="font-size:12px;font-weight:600;color:var(--orange)">Prescription required for Rx items</span></div>`;
   html+=activeCart.map((c,i)=>`
-    <div class="ci" id="ci-${i}">
+    <div class="ci" id="ci-₱{i}">
       <div class="ci-info">
         <div class="ci-name">${c.name}${c.rx?'<span style="font-size:9px;background:var(--orange);color:white;padding:1px 5px;border-radius:3px;margin-left:5px">Rx</span>':''}</div>
         <div class="ci-sub">${c.cat}</div>
@@ -1453,8 +1453,8 @@ function renderCart(){
         <span class="qty-val" id="cqty-${i}">${c.qty}</span>
         <button class="qty-btn" onclick="changeCartQty(${i},1)">+</button>
       </div>
-      <div class="ci-price" id="cprice-${i}">$${(c.qty*c.price).toFixed(2)}</div>
-      <span class="ci-del" onclick="removeCartItem(${i})" title="Remove">✕</span>
+      <div class="ci-price" id="cprice-₱{i}">₱₱{(c.qty*c.price).toFixed(2)}</div>
+      <span class="ci-del" onclick="removeCartItem(₱{i})" title="Remove">✕</span>
     </div>`).join('');
   container.innerHTML=html;
   updateCartTotals();
@@ -1469,7 +1469,7 @@ function changeCartQty(i,d){
   const item=DB.inventory[activeCart[i].idx];
   activeCart[i].qty=Math.max(1,Math.min(item?item.stock:999,activeCart[i].qty+d));
   document.getElementById('cqty-'+i).textContent=activeCart[i].qty;
-  document.getElementById('cprice-'+i).textContent='$'+(activeCart[i].qty*activeCart[i].price).toFixed(2);
+  document.getElementById('cprice-'+i).textContent='₱'+(activeCart[i].qty*activeCart[i].price).toFixed(2);
   updateCartTotals();
 }
 function removeCartItem(i){
@@ -1483,11 +1483,11 @@ function updateCartTotals(){
   const vat=parseFloat(DB.taxSettings.vat||5)/100;
   const tax=(sub-disc)*vat;
   const total=sub-disc+tax;
-  document.getElementById('pos-subtotal').textContent='$'+sub.toFixed(2);
-  document.getElementById('pos-discount').textContent='-$'+disc.toFixed(2);
-  document.getElementById('pos-tax').textContent='$'+tax.toFixed(2);
-  document.getElementById('pos-total').textContent='$'+total.toFixed(2);
-  document.getElementById('pos-total-btn').textContent='$'+total.toFixed(2);
+  document.getElementById('pos-subtotal').textContent='₱'+sub.toFixed(2);
+  document.getElementById('pos-discount').textContent='-₱'+disc.toFixed(2);
+  document.getElementById('pos-tax').textContent='₱'+tax.toFixed(2);
+  document.getElementById('pos-total').textContent='₱'+total.toFixed(2);
+  document.getElementById('pos-total-btn').textContent='₱'+total.toFixed(2);
 }
 function applyDiscount(){
   const code=document.getElementById('discCode').value.trim();
@@ -1538,7 +1538,7 @@ function checkout(){
   renderInventory(DB.inventory);
   renderPOS();
   renderDashboard();
-  showToast('🎉 Sale completed! $'+total.toFixed(2),'ok');
+  showToast('🎉 Sale completed! ₱'+total.toFixed(2),'ok');
 }
 function printReceipt(){
   if(activeCart.length===0){showToast('⚠️ Cart is empty – add items first','warn');return;}
@@ -1558,12 +1558,12 @@ function printReceipt(){
   document.getElementById('r-cashier').textContent='Cashier: '+currentUser.name;
   document.getElementById('r-date').textContent='Date: '+now.toLocaleDateString();
   document.getElementById('r-time').textContent='Time: '+now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('r-items').innerHTML=activeCart.map(c=>`<tr><td>${c.name}</td><td>${c.qty}</td><td>$${c.price.toFixed(2)}</td><td class="r-amt">$${(c.qty*c.price).toFixed(2)}</td></tr>`).join('');
-  document.getElementById('r-subtotal').textContent='$'+sub.toFixed(2);
-  document.getElementById('r-discount').textContent='-$'+disc.toFixed(2);
+  document.getElementById('r-items').innerHTML=activeCart.map(c=>`<tr><td>₱{c.name}</td><td>₱{c.qty}</td><td>₱₱{c.price.toFixed(2)}</td><td class="r-amt">₱₱{(c.qty*c.price).toFixed(2)}</td></tr>`).join('');
+  document.getElementById('r-subtotal').textContent='₱'+sub.toFixed(2);
+  document.getElementById('r-discount').textContent='-₱'+disc.toFixed(2);
   document.getElementById('r-taxlbl').textContent=DB.taxSettings.label||'Tax (5%)';
-  document.getElementById('r-tax').textContent='$'+tax.toFixed(2);
-  document.getElementById('r-total').textContent='$'+total.toFixed(2);
+  document.getElementById('r-tax').textContent='₱'+tax.toFixed(2);
+  document.getElementById('r-total').textContent='₱'+total.toFixed(2);
   document.getElementById('r-payment').textContent=activePayMethod;
   window.print();
 }
@@ -1891,8 +1891,8 @@ function renderReports(){
   const profit=txns.reduce((s,t)=>s+(t.total-t.tax-t.discount),0);
 
   // Sales tab
-  document.getElementById('rep-revenue').textContent='$'+revenue.toFixed(2);
-  document.getElementById('rep-profit').textContent='$'+profit.toFixed(2);
+  document.getElementById('rep-revenue').textContent='₱'+revenue.toFixed(2);
+  document.getElementById('rep-profit').textContent='₱'+profit.toFixed(2);
   document.getElementById('rep-txns').textContent=txns.length;
 
   // Chart
