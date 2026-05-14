@@ -1203,8 +1203,8 @@ function renderDashboard(){
   document.getElementById('dash-week-lbl').textContent=week[0].ds+' – '+week[6].ds;
   const chart=document.getElementById('dashChart');
   const lbls=document.getElementById('dashChartLbls');
-  chart.innerHTML=week.map(w=>`<div class="ch-bar" style="height:${Math.max(4,(w.amt/maxW)*130)}px" title="${w.label}: $${w.amt.toFixed(2)}"></div>`).join('');
-  lbls.innerHTML=week.map(w=>`<span>${w.label}</span>`).join('');
+  chart.innerHTML=week.map(w=>`<div class="ch-bar" style="height:₱{Math.max(4,(w.amt/maxW)*130)}px" title="₱{w.label}: ₱₱{w.amt.toFixed(2)}"></div>`).join('');
+  lbls.innerHTML=week.map(w=>`<span>₱{w.label}</span>`).join('');
 
   // Alerts
   const al=document.getElementById('dashAlerts');
@@ -1214,13 +1214,13 @@ function renderDashboard(){
   exp30.slice(0,2).forEach(i=>alerts.push({type:'orange',icon:'📅',title:'Expiring Soon: '+i.name,msg:'Expires '+i.expiryLabel||i.expiry}));
   if(pendingRx.length>0)alerts.push({type:'blue',icon:'🧾',title:'Pending Prescriptions',msg:pendingRx.length+' prescriptions awaiting approval'});
   if(alerts.length===0){al.innerHTML='<div class="empty-state" style="padding:18px"><span class="es-icon" style="font-size:28px">✅</span><p>No alerts</p></div>';
-  }else{al.innerHTML=alerts.map(a=>`<div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-sm);border-left:3px solid var(--${a.type});background:var(--${a.type}-light);margin-bottom:6px"><span style="font-size:15px">${a.icon}</span><div style="flex:1"><div style="font-size:12.5px;font-weight:600">${a.title}</div><div style="font-size:11px;color:var(--gray-400)">${a.msg}</div></div></div>`).join('');}
+  }else{al.innerHTML=alerts.map(a=>`<div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-sm);border-left:3px solid var(--₱{a.type});background:var(--₱{a.type}-light);margin-bottom:6px"><span style="font-size:15px">₱{a.icon}</span><div style="flex:1"><div style="font-size:12.5px;font-weight:600">₱{a.title}</div><div style="font-size:11px;color:var(--gray-400)">₱{a.msg}</div></div></div>`).join('');}
 
   // Recent transactions
   const rt=document.getElementById('dashRecentTxns');
   const recent=DB.transactions.slice(-5).reverse();
   if(recent.length===0){rt.innerHTML='<div class="empty-state" style="padding:18px"><span class="es-icon" style="font-size:28px">💳</span><p>No transactions yet</p></div>';}
-  else{rt.innerHTML='<table class="data-table"><thead><tr><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody>'+recent.map(t=>`<tr><td><b>${t.customer||'Walk-in'}</b><br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-weight:700;color:var(--blue)">$${t.total.toFixed(2)}</td><td><span class="sp g">✓ ${t.payment}</span></td></tr>`).join('')+'</tbody></table>';}
+  else{rt.innerHTML='<table class="data-table"><thead><tr><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody>'+recent.map(t=>`<tr><td><b>₱{t.customer||'Walk-in'}</b><br><span style="font-size:10px;color:var(--gray-400)">₱{t.time||''}</span></td><td style="font-weight:700;color:var(--blue)">₱₱{t.total.toFixed(2)}</td><td><span class="sp g">✓ ₱{t.payment}</span></td></tr>`).join('')+'</tbody></table>';}
   updateBadges();
 }
 
@@ -1251,19 +1251,19 @@ function renderInventory(data){
     const realIdx=DB.inventory.indexOf(item);
     const isLow=item.stock<=(item.alertAt||10);
     const expiryInfo=getExpiryInfo(item.expiry);
-    return`<tr id="inv-row-${realIdx}">
-      <td><b>${item.name}</b><br><span class="sp ${catColors[item.cat]||'b'}" style="margin-top:2px;font-size:10px">${item.cat||'—'}</span></td>
-      <td style="font-family:monospace;font-size:12px;color:var(--gray-400)">${item.batch||'—'}</td>
-      <td>${item.expiry?`<span class="etag ${expiryInfo.cls}">${expiryInfo.lbl}</span>`:'—'}</td>
-      <td style="${isLow?'color:var(--red);font-weight:700':''}"><b>${item.stock}</b> units${isLow?' ⚠':''}
+    return`<tr id="inv-row-₱{realIdx}">
+      <td><b>₱{item.name}</b><br><span class="sp ₱{catColors[item.cat]||'b'}" style="margin-top:2px;font-size:10px">₱{item.cat||'—'}</span></td>
+      <td style="font-family:monospace;font-size:12px;color:var(--gray-400)">₱{item.batch||'—'}</td>
+      <td>₱{item.expiry?`<span class="etag ₱{expiryInfo.cls}">₱{expiryInfo.lbl}</span>`:'—'}</td>
+      <td style="₱{isLow?'color:var(--red);font-weight:700':''}"><b>₱{item.stock}</b> units₱{isLow?' ⚠':''}
       </td>
       <td>₱₱{(item.buy||0).toFixed(2)}</td>
       <td style="font-weight:700;color:var(--blue)">₱₱{(item.sell||0).toFixed(2)}</td>
-      <td>${item.supplier||'—'}</td>
-      <td>${item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
+      <td>₱{item.supplier||'—'}</td>
+      <td>₱{item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
       <td><div style="display:flex;gap:5px;flex-wrap:nowrap">
-        <button class="btn btn-outline btn-sm" onclick="openEditMedModal(${realIdx})">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
+        <button class="btn btn-outline btn-sm" onclick="openEditMedModal(₱{realIdx})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',₱{realIdx})">🗑️</button>
       </div></td>
     </tr>`;
   }).join('');
@@ -1274,8 +1274,8 @@ function renderInventory(data){
   document.getElementById('inv-total-count').textContent=DB.inventory.length;
   document.getElementById('inv-low-count').textContent=low;
   document.getElementById('inv-exp-count').textContent=exp;
-  document.getElementById('inv-val').textContent='$'+val.toFixed(0);
-  document.getElementById('invSubtitle').textContent=`Showing ${data.length} of ${DB.inventory.length} items`;
+  document.getElementById('inv-val').textContent='₱'+val.toFixed(0);
+  document.getElementById('invSubtitle').textContent=`Showing ₱{data.length} of ₱{DB.inventory.length} items`;
   updateBadges();
 }
 function getExpiryInfo(expiry){
@@ -1309,7 +1309,7 @@ function openAddMedModal(){
   document.getElementById('med-edit-index').value='';
   // populate suppliers
   const sel=document.getElementById('med-supplier');
-  sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option>${s.name}</option>`).join('');
+  sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option>₱{s.name}</option>`).join('');
   openModal('addMedModal');
 }
 function openEditMedModal(i){
@@ -1328,7 +1328,7 @@ function openEditMedModal(i){
   document.getElementById('med-rx').checked=!!item.rx;
   document.getElementById('med-edit-index').value=i;
   const sel=document.getElementById('med-supplier');
-  sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option${item.supplier===s.name?' selected':''}>${s.name}</option>`).join('');
+  sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option₱{item.supplier===s.name?' selected':''}>₱{s.name}</option>`).join('');
   openModal('addMedModal');
 }
 function saveMedicine(){
@@ -1384,7 +1384,7 @@ function renderPOS(){
   grid.style.display='grid';empty.style.display='none';
   // build categories
   const cats=[...new Set(DB.inventory.map(i=>i.cat).filter(Boolean))];
-  catFilters.innerHTML='<button class="cat-btn active" onclick="setCat(this,\'All\')">All</button>'+cats.map(c=>`<button class="cat-btn" onclick="setCat(this,'${c}')">${c}</button>`).join('');
+  catFilters.innerHTML='<button class="cat-btn active" onclick="setCat(this,\'All\')">All</button>'+cats.map(c=>`<button class="cat-btn" onclick="setCat(this,'₱{c}')">₱{c}</button>`).join('');
   renderProductGrid('All');
 }
 function renderProductGrid(cat){
@@ -1395,12 +1395,12 @@ function renderProductGrid(cat){
   grid.innerHTML=items.map((item,_)=>{
     const ri=DB.inventory.indexOf(item);
     const isLow=item.stock<=(item.alertAt||10);
-    return`<div class="product-card${item.rx?' rx-flag':''}" onclick="addToCart(${ri})">
-      <div class="p-icon">${item.icon||'💊'}</div>
-      <div class="p-name">${item.name}</div>
-      <div class="p-cat">${item.cat||'General'}</div>
-      <div class="p-price">$${(item.sell||0).toFixed(2)}</div>
-      <div class="p-stock ${isLow?'low':'ok'}">${isLow?'⚠ Low: ':'✓ '}${item.stock} in stock</div>
+    return`<div class="product-card₱{item.rx?' rx-flag':''}" onclick="addToCart(₱{ri})">
+      <div class="p-icon">₱{item.icon||'💊'}</div>
+      <div class="p-name">₱{item.name}</div>
+      <div class="p-cat">₱{item.cat||'General'}</div>
+      <div class="p-price">₱₱{(item.sell||0).toFixed(2)}</div>
+      <div class="p-stock ₱{isLow?'low':'ok'}">₱{isLow?'⚠ Low: ':'✓ '}₱{item.stock} in stock</div>
     </div>`;
   }).join('');
 }
@@ -1443,18 +1443,18 @@ function renderCart(){
   let html='';
   if(activeCart.some(c=>c.rx))html+=`<div style="display:flex;align-items:center;gap:7px;padding:8px 16px;background:var(--orange-light);border-bottom:1px solid var(--gray-100)"><span>🏷️</span><span style="font-size:12px;font-weight:600;color:var(--orange)">Prescription required for Rx items</span></div>`;
   html+=activeCart.map((c,i)=>`
-    <div class="ci" id="ci-${i}">
+    <div class="ci" id="ci-₱{i}">
       <div class="ci-info">
-        <div class="ci-name">${c.name}${c.rx?'<span style="font-size:9px;background:var(--orange);color:white;padding:1px 5px;border-radius:3px;margin-left:5px">Rx</span>':''}</div>
-        <div class="ci-sub">${c.cat}</div>
+        <div class="ci-name">₱{c.name}₱{c.rx?'<span style="font-size:9px;background:var(--orange);color:white;padding:1px 5px;border-radius:3px;margin-left:5px">Rx</span>':''}</div>
+        <div class="ci-sub">₱{c.cat}</div>
       </div>
       <div class="qty-ctrl">
-        <button class="qty-btn" onclick="changeCartQty(${i},-1)">−</button>
-        <span class="qty-val" id="cqty-${i}">${c.qty}</span>
-        <button class="qty-btn" onclick="changeCartQty(${i},1)">+</button>
+        <button class="qty-btn" onclick="changeCartQty(₱{i},-1)">−</button>
+        <span class="qty-val" id="cqty-₱{i}">₱{c.qty}</span>
+        <button class="qty-btn" onclick="changeCartQty(₱{i},1)">+</button>
       </div>
-      <div class="ci-price" id="cprice-${i}">$${(c.qty*c.price).toFixed(2)}</div>
-      <span class="ci-del" onclick="removeCartItem(${i})" title="Remove">✕</span>
+      <div class="ci-price" id="cprice-₱{i}">₱₱{(c.qty*c.price).toFixed(2)}</div>
+      <span class="ci-del" onclick="removeCartItem(₱{i})" title="Remove">✕</span>
     </div>`).join('');
   container.innerHTML=html;
   updateCartTotals();
@@ -1469,7 +1469,7 @@ function changeCartQty(i,d){
   const item=DB.inventory[activeCart[i].idx];
   activeCart[i].qty=Math.max(1,Math.min(item?item.stock:999,activeCart[i].qty+d));
   document.getElementById('cqty-'+i).textContent=activeCart[i].qty;
-  document.getElementById('cprice-'+i).textContent='$'+(activeCart[i].qty*activeCart[i].price).toFixed(2);
+  document.getElementById('cprice-'+i).textContent='₱'+(activeCart[i].qty*activeCart[i].price).toFixed(2);
   updateCartTotals();
 }
 function removeCartItem(i){
@@ -1483,11 +1483,11 @@ function updateCartTotals(){
   const vat=parseFloat(DB.taxSettings.vat||5)/100;
   const tax=(sub-disc)*vat;
   const total=sub-disc+tax;
-  document.getElementById('pos-subtotal').textContent='$'+sub.toFixed(2);
-  document.getElementById('pos-discount').textContent='-$'+disc.toFixed(2);
-  document.getElementById('pos-tax').textContent='$'+tax.toFixed(2);
-  document.getElementById('pos-total').textContent='$'+total.toFixed(2);
-  document.getElementById('pos-total-btn').textContent='$'+total.toFixed(2);
+  document.getElementById('pos-subtotal').textContent='₱'+sub.toFixed(2);
+  document.getElementById('pos-discount').textContent='-₱'+disc.toFixed(2);
+  document.getElementById('pos-tax').textContent='₱'+tax.toFixed(2);
+  document.getElementById('pos-total').textContent='₱'+total.toFixed(2);
+  document.getElementById('pos-total-btn').textContent='₱'+total.toFixed(2);
 }
 function applyDiscount(){
   const code=document.getElementById('discCode').value.trim();
@@ -1538,7 +1538,7 @@ function checkout(){
   renderInventory(DB.inventory);
   renderPOS();
   renderDashboard();
-  showToast('🎉 Sale completed! $'+total.toFixed(2),'ok');
+  showToast('🎉 Sale completed! ₱'+total.toFixed(2),'ok');
 }
 function printReceipt(){
   if(activeCart.length===0){showToast('⚠️ Cart is empty – add items first','warn');return;}
@@ -1558,12 +1558,12 @@ function printReceipt(){
   document.getElementById('r-cashier').textContent='Cashier: '+currentUser.name;
   document.getElementById('r-date').textContent='Date: '+now.toLocaleDateString();
   document.getElementById('r-time').textContent='Time: '+now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('r-items').innerHTML=activeCart.map(c=>`<tr><td>${c.name}</td><td>${c.qty}</td><td>$${c.price.toFixed(2)}</td><td class="r-amt">$${(c.qty*c.price).toFixed(2)}</td></tr>`).join('');
-  document.getElementById('r-subtotal').textContent='$'+sub.toFixed(2);
-  document.getElementById('r-discount').textContent='-$'+disc.toFixed(2);
+  document.getElementById('r-items').innerHTML=activeCart.map(c=>`<tr><td>₱{c.name}</td><td>₱{c.qty}</td><td>₱₱{c.price.toFixed(2)}</td><td class="r-amt">₱₱{(c.qty*c.price).toFixed(2)}</td></tr>`).join('');
+  document.getElementById('r-subtotal').textContent='₱'+sub.toFixed(2);
+  document.getElementById('r-discount').textContent='-₱'+disc.toFixed(2);
   document.getElementById('r-taxlbl').textContent=DB.taxSettings.label||'Tax (5%)';
-  document.getElementById('r-tax').textContent='$'+tax.toFixed(2);
-  document.getElementById('r-total').textContent='$'+total.toFixed(2);
+  document.getElementById('r-tax').textContent='₱'+tax.toFixed(2);
+  document.getElementById('r-total').textContent='₱'+total.toFixed(2);
   document.getElementById('r-payment').textContent=activePayMethod;
   window.print();
 }
@@ -1582,18 +1582,18 @@ function renderRxList(){
   list.innerHTML=data.map((rx,_)=>{
     const realIdx=DB.prescriptions.indexOf(rx);
     return`<div class="rx-item">
-      <div class="rx-av ${avColors[rx.status]||'pending'}">${avIcons[rx.status]||'🧾'}</div>
+      <div class="rx-av ₱{avColors[rx.status]||'pending'}">₱{avIcons[rx.status]||'🧾'}</div>
       <div class="rx-info-w">
-        <div class="rx-name">${rx.patient} — ${rx.doctor||'Unknown Doctor'}</div>
-        <div class="rx-meta">${rx.meds||'No medicines listed'} · ${rx.date||'—'}</div>
-        ${rx.notes?`<div class="rx-meta" style="color:var(--purple)">📝 ${rx.notes}</div>`:''}
+        <div class="rx-name">₱{rx.patient} — ₱{rx.doctor||'Unknown Doctor'}</div>
+        <div class="rx-meta">₱{rx.meds||'No medicines listed'} · ₱{rx.date||'—'}</div>
+        ₱{rx.notes?`<div class="rx-meta" style="color:var(--purple)">📝 ₱{rx.notes}</div>`:''}
       </div>
       <div class="rx-actions-row">
-        <span class="sp ${rx.status==='pending'?'o':rx.status==='approved'?'g':'b'}">${rx.status.charAt(0).toUpperCase()+rx.status.slice(1)}</span>
-        ${rx.status==='pending'?`<button class="btn btn-success btn-sm" onclick="approveRx(${realIdx})">✓ Approve</button>`:''}
-        ${rx.status==='approved'?`<button class="btn btn-outline btn-sm" onclick="dispenseRx(${realIdx})">💊 Dispense</button>`:''}
-        <button class="btn btn-outline btn-sm" onclick="openEditRxModal(${realIdx})">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('rx',${realIdx})">🗑️</button>
+        <span class="sp ₱{rx.status==='pending'?'o':rx.status==='approved'?'g':'b'}">₱{rx.status.charAt(0).toUpperCase()+rx.status.slice(1)}</span>
+        ₱{rx.status==='pending'?`<button class="btn btn-success btn-sm" onclick="approveRx(₱{realIdx})">✓ Approve</button>`:''}
+        ₱{rx.status==='approved'?`<button class="btn btn-outline btn-sm" onclick="dispenseRx(₱{realIdx})">💊 Dispense</button>`:''}
+        <button class="btn btn-outline btn-sm" onclick="openEditRxModal(₱{realIdx})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('rx',₱{realIdx})">🗑️</button>
       </div>
     </div>`;
   }).join('');
@@ -1646,9 +1646,9 @@ function renderRxDocs(){
   if(rxUploadedDocs.length===0){list.innerHTML='';return;}
   list.innerHTML='<div class="doc-list">'+rxUploadedDocs.map((d,i)=>`
     <div class="doc-item">
-      ${d.type.startsWith('image/')?`<img src="${d.url}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;cursor:pointer" onclick="window.open('${d.url}','_blank')" alt="${d.name}">`:'<span style="font-size:20px">📄</span>'}
-      <span class="doc-name" title="${d.name}">${d.name}</span>
-      <span class="doc-del" onclick="removeRxDoc(${i})" title="Remove">✕</span>
+      ₱{d.type.startsWith('image/')?`<img src="₱{d.url}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;cursor:pointer" onclick="window.open('₱{d.url}','_blank')" alt="₱{d.name}">`:'<span style="font-size:20px">📄</span>'}
+      <span class="doc-name" title="₱{d.name}">₱{d.name}</span>
+      <span class="doc-del" onclick="removeRxDoc(₱{i})" title="Remove">✕</span>
     </div>`).join('')+'</div>';
 }
 function removeRxDoc(i){rxUploadedDocs.splice(i,1);renderRxDocs();}
@@ -1664,10 +1664,10 @@ function renderCustomerList(){
   const tcols=['var(--blue)','var(--green)','var(--orange)','var(--purple)','var(--red)'];
   body.innerHTML=DB.customers.map((c,i)=>{
     const init=(c.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    const badge=c.loyalty?`<span class="ly-badge">⭐ ${c.loyalty}</span>`:'';
-    return`<div class="c-item${i===selectedCustIdx?' active':''}" onclick="selectCustomer(${i})">
-      <div class="c-av" style="background:${cols[i%5]};color:${tcols[i%5]}">${init}</div>
-      <div><div class="c-name">${c.name}</div><div class="c-sub">${c.phone||'—'}</div></div>${badge}
+    const badge=c.loyalty?`<span class="ly-badge">⭐ ₱{c.loyalty}</span>`:'';
+    return`<div class="c-item₱{i===selectedCustIdx?' active':''}" onclick="selectCustomer(₱{i})">
+      <div class="c-av" style="background:₱{cols[i%5]};color:₱{tcols[i%5]}">₱{init}</div>
+      <div><div class="c-name">₱{c.name}</div><div class="c-sub">₱{c.phone||'—'}</div></div>₱{badge}
     </div>`;
   }).join('');
 }
@@ -1682,32 +1682,32 @@ function selectCustomer(i){
   const totalSpent=cTxns.reduce((s,t)=>s+t.total,0);
   document.getElementById('custProfile').innerHTML=`
     <div class="cp-header">
-      <div class="cp-av" style="background:${cols[i%5]};color:${tcols[i%5]}">${init}</div>
+      <div class="cp-av" style="background:₱{cols[i%5]};color:₱{tcols[i%5]}">₱{init}</div>
       <div style="flex:1">
-        <div style="font-size:17px;font-weight:700">${c.name}</div>
-        <div style="font-size:12px;color:var(--gray-400);margin-top:3px">📞 ${c.phone||'—'} &nbsp;·&nbsp; 📧 ${c.email||'—'}</div>
-        ${c.address?`<div style="font-size:12px;color:var(--gray-400)">📍 ${c.address}</div>`:''}
+        <div style="font-size:17px;font-weight:700">₱{c.name}</div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:3px">📞 ₱{c.phone||'—'} &nbsp;·&nbsp; 📧 ₱{c.email||'—'}</div>
+        ₱{c.address?`<div style="font-size:12px;color:var(--gray-400)">📍 ₱{c.address}</div>`:''}
         <div style="display:flex;gap:6px;margin-top:7px;flex-wrap:wrap">
-          ${c.loyalty?`<span class="sp o">⭐ ${c.loyalty} Member</span>`:'<span class="sp g">Regular Customer</span>'}
-          ${c.ins?`<span class="sp b">🏥 ${c.ins}</span>`:''}
+          ₱{c.loyalty?`<span class="sp o">⭐ ₱{c.loyalty} Member</span>`:'<span class="sp g">Regular Customer</span>'}
+          ₱{c.ins?`<span class="sp b">🏥 ₱{c.ins}</span>`:''}
         </div>
-        ${c.notes?`<div style="font-size:12px;color:var(--red);margin-top:5px">⚠️ ${c.notes}</div>`:''}
+        ₱{c.notes?`<div style="font-size:12px;color:var(--red);margin-top:5px">⚠️ ₱{c.notes}</div>`:''}
       </div>
       <div style="display:flex;gap:6px;flex-shrink:0">
-        <button class="btn btn-outline btn-sm" onclick="openEditCustModal(${i})">✏️ Edit</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('customer',${i})">🗑️</button>
+        <button class="btn btn-outline btn-sm" onclick="openEditCustModal(₱{i})">✏️ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('customer',₱{i})">🗑️</button>
       </div>
     </div>
     <div class="cust-stats">
-      <div class="cust-stat"><div class="cs-val" style="color:var(--blue)">$${totalSpent.toFixed(2)}</div><div class="cs-lbl">Total Spent</div></div>
-      <div class="cust-stat"><div class="cs-val">${cTxns.length}</div><div class="cs-lbl">Visits</div></div>
-      <div class="cust-stat"><div class="cs-val" style="color:var(--purple)">${Math.floor(totalSpent)} pts</div><div class="cs-lbl">Loyalty Points</div></div>
+      <div class="cust-stat"><div class="cs-val" style="color:var(--blue)">₱₱{totalSpent.toFixed(2)}</div><div class="cs-lbl">Total Spent</div></div>
+      <div class="cust-stat"><div class="cs-val">₱{cTxns.length}</div><div class="cs-lbl">Visits</div></div>
+      <div class="cust-stat"><div class="cs-val" style="color:var(--purple)">₱{Math.floor(totalSpent)} pts</div><div class="cs-lbl">Loyalty Points</div></div>
     </div>
     <div class="card-title" style="margin-bottom:10px">🕒 Purchase History</div>
-    ${cTxns.length===0?'<div class="empty-state" style="padding:16px"><p>No purchases yet</p></div>':
+    ₱{cTxns.length===0?'<div class="empty-state" style="padding:16px"><p>No purchases yet</p></div>':
     `<div style="overflow-x:auto"><table class="data-table">
       <thead><tr><th>Date</th><th>Invoice</th><th>Amount</th><th>Payment</th></tr></thead>
-      <tbody>${cTxns.slice(-5).reverse().map(t=>`<tr><td>${t.date}<br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-family:monospace;font-size:12px;color:var(--blue)">${t.invoice}</td><td style="font-weight:700;color:var(--blue)">$${t.total.toFixed(2)}</td><td><span class="sp g">${t.payment}</span></td></tr>`).join('')}
+      <tbody>₱{cTxns.slice(-5).reverse().map(t=>`<tr><td>₱{t.date}<br><span style="font-size:10px;color:var(--gray-400)">₱{t.time||''}</span></td><td style="font-family:monospace;font-size:12px;color:var(--blue)">₱{t.invoice}</td><td style="font-weight:700;color:var(--blue)">₱₱{t.total.toFixed(2)}</td><td><span class="sp g">₱{t.payment}</span></td></tr>`).join('')}
       </tbody></table></div>`}`;
 }
 function openAddCustModal(){
@@ -1768,20 +1768,20 @@ function renderSuppliers(){
     const pos=DB.purchaseOrders.filter(p=>p.supplier===s.name);
     const active=pos.filter(p=>p.status==='In Transit'||p.status==='Pending').length;
     return`<div class="sup-card">
-      <div class="sup-logo" style="background:${bgs[i%6]}">${icons[i%6]}</div>
-      <div style="font-size:14px;font-weight:700">${s.name}</div>
-      <div style="font-size:11px;color:var(--gray-400);margin-bottom:8px">${s.type||'Supplier'} · ${s.location||'—'}</div>
-      <div style="font-size:12px;color:var(--gray-400)">Contact: ${s.contact||'—'}</div>
-      <div style="font-size:12px;color:var(--gray-400)">📞 ${s.phone||'—'}</div>
+      <div class="sup-logo" style="background:₱{bgs[i%6]}">₱{icons[i%6]}</div>
+      <div style="font-size:14px;font-weight:700">₱{s.name}</div>
+      <div style="font-size:11px;color:var(--gray-400);margin-bottom:8px">₱{s.type||'Supplier'} · ₱{s.location||'—'}</div>
+      <div style="font-size:12px;color:var(--gray-400)">Contact: ₱{s.contact||'—'}</div>
+      <div style="font-size:12px;color:var(--gray-400)">📞 ₱{s.phone||'—'}</div>
       <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap">
-        <span class="po-badge" style="background:var(--blue-light);color:var(--blue)">${pos.length} Total POs</span>
-        ${active>0?`<span class="po-badge" style="background:var(--orange-light);color:var(--orange)">${active} Active</span>`:''}
+        <span class="po-badge" style="background:var(--blue-light);color:var(--blue)">₱{pos.length} Total POs</span>
+        ₱{active>0?`<span class="po-badge" style="background:var(--orange-light);color:var(--orange)">₱{active} Active</span>`:''}
       </div>
       <div style="height:1px;background:var(--gray-100);margin:10px 0"></div>
       <div style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="btn btn-outline btn-sm" onclick="openEditSupModal(${i})">✏️ Edit</button>
-        <button class="btn btn-primary btn-sm" onclick="openNewPO('${s.name}')">📝 New PO</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('supplier',${i})">🗑️</button>
+        <button class="btn btn-outline btn-sm" onclick="openEditSupModal(₱{i})">✏️ Edit</button>
+        <button class="btn btn-primary btn-sm" onclick="openNewPO('₱{s.name}')">📝 New PO</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('supplier',₱{i})">🗑️</button>
       </div>
     </div>`;
   }).join('');
@@ -1822,16 +1822,16 @@ function renderPOs(){
   const statusCls={Pending:'o',Delivered:'g','In Transit':'b',Cancelled:'r'};
   tb.innerHTML=DB.purchaseOrders.map((po,i)=>`
     <tr>
-      <td style="font-family:monospace;color:var(--blue)">${po.ref}</td>
-      <td>${po.supplier}</td>
-      <td>${po.date||'—'}</td>
-      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${po.items||''}">${po.items||'—'}</td>
-      <td style="font-weight:700">$${parseFloat(po.total||0).toFixed(2)}</td>
-      <td><span class="sp ${statusCls[po.status]||'b'}">${po.status}</span></td>
-      <td>${po.delivery||'—'}</td>
+      <td style="font-family:monospace;color:var(--blue)">₱{po.ref}</td>
+      <td>₱{po.supplier}</td>
+      <td>₱{po.date||'—'}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="₱{po.items||''}">₱{po.items||'—'}</td>
+      <td style="font-weight:700">₱₱{parseFloat(po.total||0).toFixed(2)}</td>
+      <td><span class="sp ₱{statusCls[po.status]||'b'}">₱{po.status}</span></td>
+      <td>₱{po.delivery||'—'}</td>
       <td><div style="display:flex;gap:5px">
-        <button class="btn btn-outline btn-sm" onclick="openEditPOModal(${i})">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('po',${i})">🗑️</button>
+        <button class="btn btn-outline btn-sm" onclick="openEditPOModal(₱{i})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('po',₱{i})">🗑️</button>
       </div></td>
     </tr>`).join('');
   document.getElementById('poSubtitle').textContent=DB.purchaseOrders.length+' orders';
@@ -1879,7 +1879,7 @@ function updateSupplierDropdowns(){
     const sel=document.getElementById(id);
     if(!sel)return;
     const cur=sel.value;
-    sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option${s.name===cur?' selected':''}>${s.name}</option>`).join('');
+    sel.innerHTML='<option value="">Select supplier</option>'+DB.suppliers.map(s=>`<option₱{s.name===cur?' selected':''}>₱{s.name}</option>`).join('');
   });
 }
 
@@ -1898,8 +1898,8 @@ function renderReports(){
   // Chart
   const days=getChartDays(period);
   const maxA=Math.max(...days.map(d=>d.amt),1);
-  document.getElementById('repChart').innerHTML=days.map(d=>`<div class="ch-bar" style="height:${Math.max(4,(d.amt/maxA)*160)}px" title="${d.label}: $${d.amt.toFixed(2)}"></div>`).join('');
-  document.getElementById('repChartLbls').innerHTML=days.map(d=>`<span>${d.label}</span>`).join('');
+  document.getElementById('repChart').innerHTML=days.map(d=>`<div class="ch-bar" style="height:₱{Math.max(4,(d.amt/maxA)*160)}px" title="₱{d.label}: ₱₱{d.amt.toFixed(2)}"></div>`).join('');
+  document.getElementById('repChartLbls').innerHTML=days.map(d=>`<span>₱{d.label}</span>`).join('');
 
   // Top meds
   const medSales={};
@@ -1908,12 +1908,12 @@ function renderReports(){
   const maxQ=topMeds[0]?topMeds[0][1]:1;
   const tmEl=document.getElementById('topMedsRep');
   if(topMeds.length===0){tmEl.innerHTML='<div class="empty-state" style="padding:16px"><p>No sales data</p></div>';}
-  else{tmEl.innerHTML=topMeds.map(([name,qty],i)=>`<div class="top-med-item"><div class="tmr" style="background:${['var(--blue)','var(--gray-400)','var(--orange)','var(--purple)','var(--red)'][i]}">${i+1}</div><div style="flex:1"><div style="font-size:12px;font-weight:600;margin-bottom:3px">${name}</div><div class="tmb" style="width:${(qty/maxQ)*100}%"></div></div><div style="font-size:12px;font-weight:700;color:var(--blue)">${qty}</div></div>`).join('');}
+  else{tmEl.innerHTML=topMeds.map(([name,qty],i)=>`<div class="top-med-item"><div class="tmr" style="background:₱{['var(--blue)','var(--gray-400)','var(--orange)','var(--purple)','var(--red)'][i]}">₱{i+1}</div><div style="flex:1"><div style="font-size:12px;font-weight:600;margin-bottom:3px">₱{name}</div><div class="tmb" style="width:₱{(qty/maxQ)*100}%"></div></div><div style="font-size:12px;font-weight:700;color:var(--blue)">₱{qty}</div></div>`).join('');}
 
   // Transaction table
   const repTable=document.getElementById('repTxnTable');
   if(txns.length===0){repTable.innerHTML='<tr><td colspan="7"><div class="empty-state" style="padding:20px"><p>No transactions for this period</p></div></td></tr>';}
-  else{repTable.innerHTML=txns.slice().reverse().map(t=>`<tr><td style="font-family:monospace;color:var(--blue)">${t.invoice}</td><td>${t.date}<br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td>${t.customer||'Walk-in'}</td><td>${(t.items||[]).length} items</td><td style="font-weight:700">$${t.total.toFixed(2)}</td><td><span class="sp g">${t.payment}</span></td><td>${t.cashier||'—'}</td></tr>`).join('');}
+  else{repTable.innerHTML=txns.slice().reverse().map(t=>`<tr><td style="font-family:monospace;color:var(--blue)">₱{t.invoice}</td><td>₱{t.date}<br><span style="font-size:10px;color:var(--gray-400)">₱{t.time||''}</span></td><td>₱{t.customer||'Walk-in'}</td><td>₱{(t.items||[]).length} items</td><td style="font-weight:700">₱₱{t.total.toFixed(2)}</td><td><span class="sp g">₱{t.payment}</span></td><td>₱{t.cashier||'—'}</td></tr>`).join('');}
 
   // Inventory tab
   document.getElementById('riv-total').textContent=DB.inventory.length;
@@ -1922,27 +1922,27 @@ function renderReports(){
   const valC=DB.inventory.reduce((s,i)=>s+i.stock*i.sell,0);
   document.getElementById('riv-low').textContent=lowC;
   document.getElementById('riv-exp').textContent=expC;
-  document.getElementById('riv-val').textContent='$'+valC.toFixed(2);
+  document.getElementById('riv-val').textContent='₱'+valC.toFixed(2);
   const invTable=document.getElementById('repInvTable');
   if(DB.inventory.length===0){invTable.innerHTML='<tr><td colspan="7"><div class="empty-state" style="padding:16px"><p>No inventory data</p></div></td></tr>';}
-  else{invTable.innerHTML=DB.inventory.map(i=>{const ei=getExpiryInfo(i.expiry);const isLow=i.stock<=(i.alertAt||10);return`<tr><td><b>${i.name}</b></td><td>${i.cat||'—'}</td><td style="${isLow?'color:var(--red);font-weight:700':''}"><b>${i.stock}</b>${isLow?' ⚠':''}</td><td>$${(i.sell||0).toFixed(2)}</td><td>$${((i.stock||0)*(i.sell||0)).toFixed(2)}</td><td>${i.expiry?`<span class="etag ${ei.cls}">${ei.lbl}</span>`:'—'}</td><td>${isLow?'<span class="sp r">Low</span>':'<span class="sp g">OK</span>'}</td></tr>`;}).join('');}
+  else{invTable.innerHTML=DB.inventory.map(i=>{const ei=getExpiryInfo(i.expiry);const isLow=i.stock<=(i.alertAt||10);return`<tr><td><b>₱{i.name}</b></td><td>₱{i.cat||'—'}</td><td style="₱{isLow?'color:var(--red);font-weight:700':''}"><b>₱{i.stock}</b>₱{isLow?' ⚠':''}</td><td>₱₱{(i.sell||0).toFixed(2)}</td><td>₱₱{((i.stock||0)*(i.sell||0)).toFixed(2)}</td><td>₱{i.expiry?`<span class="etag ₱{ei.cls}">₱{ei.lbl}</span>`:'—'}</td><td>₱{isLow?'<span class="sp r">Low</span>':'<span class="sp g">OK</span>'}</td></tr>`;}).join('');}
 
   // Financial tab
   const cost=txns.reduce((s,t)=>s+(t.items||[]).reduce((ss,it)=>{const inv=DB.inventory.find(ii=>ii.name===it.name);return ss+(inv?it.qty*inv.buy:0);},0),0);
-  document.getElementById('rf-rev').textContent='$'+revenue.toFixed(2);
-  document.getElementById('rf-cost').textContent='$'+cost.toFixed(2);
-  document.getElementById('rf-net').textContent='$'+(revenue-cost).toFixed(2);
+  document.getElementById('rf-rev').textContent='₱'+revenue.toFixed(2);
+  document.getElementById('rf-cost').textContent='₱'+cost.toFixed(2);
+  document.getElementById('rf-net').textContent='₱'+(revenue-cost).toFixed(2);
   // Payment breakdown
   const payBreak={};txns.forEach(t=>payBreak[t.payment]=(payBreak[t.payment]||0)+t.total);
   const rfPay=document.getElementById('rfPayBreakdown');
   if(Object.keys(payBreak).length===0){rfPay.innerHTML='<div class="empty-state" style="padding:16px"><p>No data</p></div>';}
-  else{rfPay.innerHTML=Object.entries(payBreak).map(([m,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;background:var(--gray-bg);border-radius:var(--radius-sm);margin-bottom:6px"><div style="font-size:13px;font-weight:600">${m}</div><div style="font-size:14px;font-weight:800;color:var(--blue)">$${v.toFixed(2)}</div></div>`).join('');}
+  else{rfPay.innerHTML=Object.entries(payBreak).map(([m,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;background:var(--gray-bg);border-radius:var(--radius-sm);margin-bottom:6px"><div style="font-size:13px;font-weight:600">₱{m}</div><div style="font-size:14px;font-weight:800;color:var(--blue)">₱₱{v.toFixed(2)}</div></div>`).join('');}
   // Daily summary
   const rfDaily=document.getElementById('rfDailySummary');
   const dailyMap={};txns.forEach(t=>dailyMap[t.dateRaw]=(dailyMap[t.dateRaw]||0)+t.total);
   const dailyArr=Object.entries(dailyMap).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7);
   if(dailyArr.length===0){rfDaily.innerHTML='<div class="empty-state" style="padding:16px"><p>No data</p></div>';}
-  else{rfDaily.innerHTML=dailyArr.map(([d,v])=>`<div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--gray-bg);border-radius:var(--radius-sm);margin-bottom:5px"><div style="font-size:12.5px">${d}</div><div style="font-size:13px;font-weight:700;color:var(--blue)">$${v.toFixed(2)}</div></div>`).join('');}
+  else{rfDaily.innerHTML=dailyArr.map(([d,v])=>`<div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--gray-bg);border-radius:var(--radius-sm);margin-bottom:5px"><div style="font-size:12.5px">₱{d}</div><div style="font-size:13px;font-weight:700;color:var(--blue)">₱₱{v.toFixed(2)}</div></div>`).join('');}
 }
 function filterTxnsByPeriod(period){
   const now=new Date();
@@ -2002,13 +2002,13 @@ function renderAttendance(){
   const statCls={Present:'g',Absent:'r',Late:'o',Half:'b'};
   tb.innerHTML=records.slice().reverse().map(r=>`
     <tr>
-      <td><b>${r.empName}</b></td>
-      <td><span class="sp b">${r.role}</span></td>
-      <td>${r.date}</td>
-      <td style="color:var(--green);font-weight:600">${r.timeIn||'—'}</td>
-      <td style="color:var(--orange);font-weight:600">${r.timeOut||'<span style="color:var(--gray-400)">Still in</span>'}</td>
-      <td>${r.hours?r.hours+'h':'—'}</td>
-      <td><span class="sp ${statCls[r.status]||'g'}">${r.status}</span></td>
+      <td><b>₱{r.empName}</b></td>
+      <td><span class="sp b">₱{r.role}</span></td>
+      <td>₱{r.date}</td>
+      <td style="color:var(--green);font-weight:600">₱{r.timeIn||'—'}</td>
+      <td style="color:var(--orange);font-weight:600">₱{r.timeOut||'<span style="color:var(--gray-400)">Still in</span>'}</td>
+      <td>₱{r.hours?r.hours+'h':'—'}</td>
+      <td><span class="sp ₱{statCls[r.status]||'g'}">₱{r.status}</span></td>
     </tr>`).join('');
   document.getElementById('attSubtitle').textContent=records.length+' records';
   // Employee status cards
@@ -2020,11 +2020,11 @@ function renderAttendance(){
     const rec=todayRecs.find(r=>r.empName===name);
     const emp=DB.employees.find(e=>e.name===name)||{role:currentUser.role};
     return`<div class="att-card">
-      <div class="att-icon">${rec?(rec.timeOut?'✅':'🟢'):'⭕'}</div>
-      <div class="att-name">${name}${name===currentUser.name?' (You)':''}</div>
-      <div class="att-lbl">${emp.role||'—'}</div>
-      <div class="att-val">${rec?(rec.timeOut?'Completed':'Timed In'):'Not Yet'}</div>
-      ${rec?`<div style="font-size:11px;color:var(--gray-400);margin-top:2px">In: ${rec.timeIn||'—'} ${rec.timeOut?'| Out: '+rec.timeOut:''}</div>`:''}
+      <div class="att-icon">₱{rec?(rec.timeOut?'✅':'🟢'):'⭕'}</div>
+      <div class="att-name">₱{name}₱{name===currentUser.name?' (You)':''}</div>
+      <div class="att-lbl">₱{emp.role||'—'}</div>
+      <div class="att-val">₱{rec?(rec.timeOut?'Completed':'Timed In'):'Not Yet'}</div>
+      ₱{rec?`<div style="font-size:11px;color:var(--gray-400);margin-top:2px">In: ₱{rec.timeIn||'—'} ₱{rec.timeOut?'| Out: '+rec.timeOut:''}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -2105,7 +2105,7 @@ function renderUsersTable(){
   if(DB.users.length===0){el.innerHTML='<div class="empty-state" style="padding:20px"><p>No users configured</p></div>';return;}
   el.innerHTML=`<div style="overflow-x:auto"><table class="data-table">
     <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Actions</th></tr></thead>
-    <tbody>${DB.users.map((u,i)=>`<tr><td><b>${u.name}</b></td><td style="font-family:monospace;color:var(--blue)">${u.username}</td><td><span class="sp b">${u.role}</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteUser(${i})" ${u.id===1?'disabled title="Cannot delete admin"':''}>🗑️</button></td></tr>`).join('')}
+    <tbody>₱{DB.users.map((u,i)=>`<tr><td><b>₱{u.name}</b></td><td style="font-family:monospace;color:var(--blue)">₱{u.username}</td><td><span class="sp b">₱{u.role}</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteUser(₱{i})" ₱{u.id===1?'disabled title="Cannot delete admin"':''}>🗑️</button></td></tr>`).join('')}
     </tbody></table></div>`;
 }
 function addSystemUser(){
@@ -2134,7 +2134,7 @@ function confirmDelete(type,idx){
     po:DB.purchaseOrders[idx]?.ref,
   };
   document.getElementById('cfTitle').textContent='Delete '+labels[type]+'?';
-  document.getElementById('cfMsg').textContent=`Remove "${names[type]||'this item'}"? This action cannot be undone.`;
+  document.getElementById('cfMsg').textContent=`Remove "₱{names[type]||'this item'}"? This action cannot be undone.`;
   document.getElementById('cfOkBtn').onclick=()=>{
     if(type==='medicine'){DB.inventory.splice(idx,1);renderInventory(DB.inventory);renderPOS();}
     else if(type==='rx'){DB.prescriptions.splice(idx,1);renderRxList();}
@@ -2164,7 +2164,7 @@ function showToast(msg,type='ok'){
 
 // ══════════ CSV DOWNLOAD ══════════
 function downloadCSV(rows,filename){
-  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const csv=rows.map(r=>r.map(c=>`"₱{String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=filename;a.style.display='none';
