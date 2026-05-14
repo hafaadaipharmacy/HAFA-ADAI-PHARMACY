@@ -453,7 +453,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
       </div>
       <div class="product-panel">
         <div class="product-grid" id="productGrid"></div>
-        <div class="empty-state" id="posEmpty" style="display:none"><span class="es-icon">💊</span><h3>No Products</h3><p>Add Product in Inventory to see them here</p></div>
+        <div class="empty-state" id="posEmpty" style="display:none"><span class="es-icon">💊</span><h3>No Products</h3><p>Add medicines in Inventory to see them here</p></div>
       </div>
     </div>
   </div>
@@ -465,7 +465,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     <div class="search-box"><span>🔍</span><input type="text" placeholder="Search medicines, batch no…" oninput="searchInventory(this.value)"></div>
     <button class="btn btn-outline btn-sm" onclick="exportInventoryExcel()">📥 Export Excel</button>
     <button class="btn btn-outline btn-sm" onclick="exportInventoryPDF()">📄 Export PDF</button>
-    <button class="btn btn-primary" onclick="openAddMedModal()">➕ Add Product</button>
+    <button class="btn btn-primary" onclick="openAddMedModal()">➕ Add Medicine</button>
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
     <div class="card" style="display:flex;align-items:center;gap:11px;padding:13px 15px"><span style="font-size:26px">📦</span><div><div style="font-size:19px;font-weight:800" id="inv-total-count">0</div><div style="font-size:11px;color:var(--gray-400)">Total Products</div></div></div>
