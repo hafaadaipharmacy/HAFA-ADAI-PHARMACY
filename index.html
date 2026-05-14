@@ -814,18 +814,20 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
 
 <!-- ══════════ MODALS ══════════ -->
 
-<!-- ADD / EDIT MEDICINE -->
+<!-- ADD / EDIT PRODUCT -->
 <div class="modal-overlay" id="addMedModal" onclick="if(event.target===this)closeModal('addMedModal')">
   <div class="modal modal-lg">
-    <div class="modal-title" id="addMedTitle">➕ Add New Medicine</div>
+    <div class="modal-title" id="addProTitle">➕ Add New Product</div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Product Name *</label><input class="form-input" id="med-name" placeholder="e.g., Amoxicillin 500mg"></div>
+      <div class="form-group"><label class="form-label">Product Name *</label><input class="form-input" id="pro-name" placeholder="e.g., Amoxicillin 500mg"></div>
       <div class="form-group"><label class="form-label">Category *</label>
-        <select class="form-input" id="med-cat">
+        <select class="form-input" id="pro-cat">
           <option value="">Select category</option>
           <option>Antibiotic</option><option>Pain Reliever</option><option>Vitamin/Supplement</option>
           <option>Cardiovascular</option><option>Diabetes</option><option>Allergy</option>
-          <option>Gastroenterology</option><option>Respiratory</option><option>Dermatology</option><option>Other</option>
+          <option>Gastroenterology</option><option>Respiratory</option><option>Dermatology</option><option>Medical Supplies</option>
+          <option>Hygiene Product</option><option>Fragrances/Perfume</option><option>Baby Care/Adult Care</option><option>Food an Grocery Items</option><option>Beverages</option>
+          <option>Beauty and Cosmetic</option><option>Other</option>
         </select>
       </div>
       <div class="form-group"><label class="form-label">Batch Number</label><input class="form-input" id="med-batch" placeholder="e.g., AM2024-B3"></div>
