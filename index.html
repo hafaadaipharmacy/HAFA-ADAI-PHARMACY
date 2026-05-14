@@ -641,9 +641,9 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
   <!-- FINANCIAL TAB -->
   <div class="rep-section" id="rep-financial">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px">
-      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rf-rev">$0</div><div class="kpi-label">Total Revenue</div></div>
-      <div class="kpi red"><div class="kpi-icon">📉</div><div class="kpi-value" id="rf-cost">$0</div><div class="kpi-label">Total Cost</div></div>
-      <div class="kpi green"><div class="kpi-icon">✅</div><div class="kpi-value" id="rf-net">$0</div><div class="kpi-label">Net Profit</div></div>
+      <div class="kpi blue"><div class="kpi-icon">💰</div><div class="kpi-value" id="rf-rev">₱ 0</div><div class="kpi-label">Total Revenue</div></div>
+      <div class="kpi red"><div class="kpi-icon">📉</div><div class="kpi-value" id="rf-cost">₱ 0</div><div class="kpi-label">Total Cost</div></div>
+      <div class="kpi green"><div class="kpi-icon">✅</div><div class="kpi-value" id="rf-net">₱ 0</div><div class="kpi-label">Net Profit</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div class="card">
@@ -799,10 +799,10 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     <tbody id="r-items"></tbody>
   </table>
   <div class="rt">
-    <div class="rt-row"><span>Subtotal</span><span id="r-subtotal">$0.00</span></div>
-    <div class="rt-row"><span>Discount</span><span id="r-discount">-$0.00</span></div>
-    <div class="rt-row"><span id="r-taxlbl">Tax (5%)</span><span id="r-tax">$0.00</span></div>
-    <div class="rt-row rt-total"><span>TOTAL</span><span id="r-total">$0.00</span></div>
+    <div class="rt-row"><span>Subtotal</span><span id="r-subtotal">₱ 0.00</span></div>
+    <div class="rt-row"><span>Discount</span><span id="r-discount">-₱ 0.00</span></div>
+    <div class="rt-row"><span id="r-taxlbl">Tax (5%)</span><span id="r-tax">₱ 0.00</span></div>
+    <div class="rt-row rt-total"><span>TOTAL</span><span id="r-total">₱ 0.00</span></div>
     <div class="rt-row" style="margin-top:6px"><span>Payment</span><span id="r-payment">Cash</span></div>
   </div>
   <div class="rf">
@@ -832,8 +832,8 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
       <div class="form-group"><label class="form-label">Expiry Date</label><input class="form-input" id="med-expiry" type="date"></div>
       <div class="form-group"><label class="form-label">Stock Quantity *</label><input class="form-input" id="med-stock" type="number" placeholder="0" min="0"></div>
       <div class="form-group"><label class="form-label">Low Stock Alert (units)</label><input class="form-input" id="med-alert" type="number" placeholder="10" min="0"></div>
-      <div class="form-group"><label class="form-label">Purchase Price ($) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
-      <div class="form-group"><label class="form-label">Selling Price ($) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Purchase Price (₱ ) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Selling Price (₱ ) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
     </div>
     <div class="form-group"><label class="form-label">Supplier</label><select class="form-input" id="med-supplier"><option value="">Select supplier</option></select></div>
     <div class="form-group"><label class="form-label">Product Emoji Icon</label><input class="form-input" id="med-icon" placeholder="e.g. 💊 🟡 💙" maxlength="4" style="font-size:20px"></div>
@@ -932,7 +932,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     </div>
     <div class="form-group"><label class="form-label">Items / Description</label><textarea class="form-input" id="po-items" rows="3" placeholder="e.g., Amoxicillin 500mg × 100, Paracetamol × 200" style="resize:vertical"></textarea></div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Total Amount ($)</label><input class="form-input" id="po-total" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Total Amount (₱ )</label><input class="form-input" id="po-total" type="number" placeholder="0.00" step="0.01"></div>
       <div class="form-group"><label class="form-label">Invoice / PO Ref #</label><input class="form-input" id="po-ref" placeholder="Auto-generated if blank"></div>
     </div>
     <input type="hidden" id="po-edit-index">
