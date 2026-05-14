@@ -1262,8 +1262,8 @@ function renderInventory(data){
       </td>
       <td>₱₱{(item.buy||0).toFixed(2)}</td>
       <td style="font-weight:700;color:var(--blue)">₱₱{(item.sell||0).toFixed(2)}</td>
-      <td>₱{item.supplier||'—'}</td>
-      <td>₱{item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
+      <td>${item.supplier||'—'}</td>
+      <td>${item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
       <td><div style="display:flex;gap:5px;flex-wrap:nowrap">
         <button class="btn btn-outline btn-sm" onclick="openEditMedModal(${realIdx})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
