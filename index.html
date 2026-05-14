@@ -819,24 +819,21 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
   <div class="modal modal-lg">
     <div class="modal-title" id="addMedTitle">➕ Add New Medicine</div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Medicine Name *</label><input class="form-input" id="med-name" placeholder="e.g., Amoxicillin 500mg"></div>
+      <div class="form-group"><label class="form-label">Product Name *</label><input class="form-input" id="med-name" placeholder="e.g., Amoxicillin 500mg"></div>
       <div class="form-group"><label class="form-label">Category *</label>
         <select class="form-input" id="med-cat">
           <option value="">Select category</option>
           <option>Antibiotic</option><option>Pain Reliever</option><option>Vitamin/Supplement</option>
           <option>Cardiovascular</option><option>Diabetes</option><option>Allergy</option>
-          <option>Gastroenterology</option><option>Respiratory</option><option>Dermatology</option><option>Pain Relief Produt</option>
-          <option>Non-Prescription Medicine</option>Prescription Medicine<option>Respiratory</option><option>Personal Care</option><option>Beauty and Cosmetic</option>
-          <option>Frarances/Perfume</option><option>Baby Care</option><option>Medical Supply</option><option>Food & Grocery Items</option>
-          <option>Beverages</option><option>Household Items</option><option>Other</option>
+          <option>Gastroenterology</option><option>Respiratory</option><option>Dermatology</option><option>Other</option>
         </select>
       </div>
       <div class="form-group"><label class="form-label">Batch Number</label><input class="form-input" id="med-batch" placeholder="e.g., AM2024-B3"></div>
       <div class="form-group"><label class="form-label">Expiry Date</label><input class="form-input" id="med-expiry" type="date"></div>
       <div class="form-group"><label class="form-label">Stock Quantity *</label><input class="form-input" id="med-stock" type="number" placeholder="0" min="0"></div>
       <div class="form-group"><label class="form-label">Low Stock Alert (units)</label><input class="form-input" id="med-alert" type="number" placeholder="10" min="0"></div>
-      <div class="form-group"><label class="form-label">Purchase Price (₱ ) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
-      <div class="form-group"><label class="form-label">Selling Price (₱ ) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Purchase Price (₱) *</label><input class="form-input" id="med-buy" type="number" placeholder="0.00" step="0.01"></div>
+      <div class="form-group"><label class="form-label">Selling Price (₱) *</label><input class="form-input" id="med-sell" type="number" placeholder="0.00" step="0.01"></div>
     </div>
     <div class="form-group"><label class="form-label">Supplier</label><select class="form-input" id="med-supplier"><option value="">Select supplier</option></select></div>
     <div class="form-group"><label class="form-label">Product Emoji Icon</label><input class="form-input" id="med-icon" placeholder="e.g. 💊 🟡 💙" maxlength="4" style="font-size:20px"></div>
@@ -851,6 +848,7 @@ body{font-family:'Inter',sans-serif;background:var(--gray-bg);color:var(--gray-8
     </div>
   </div>
 </div>
+
 
 <!-- ADD / EDIT PRESCRIPTION -->
 <div class="modal-overlay" id="addRxModal" onclick="if(event.target===this)closeModal('addRxModal')">
