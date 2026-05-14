@@ -1239,36 +1239,61 @@ function updateBadges(){
 function renderInventory(data){
   const tb=document.getElementById('invTbody');
   if(data.length===0){
-    tb.innerHTML='<tr><td colspan="9"><div class="empty-state" style="padding:28px"><span class="es-icon">📦</span><h3>No Medicines Added</h3><p>Click "Add Product" to get started</p></div></td></tr>';
-    document.getElementById('inv-total-count').textContent='0';
-    document.getElementById('inv-low-count').textContent='0';
-    document.getElementById('inv-exp-count').textContent='0';
-    document.getElementById('inv-val').textContent='₱0';
-    document.getElementById('invSubtitle').textContent='0 items';
-    return;
-  }
-  const catColors={Antibiotic:'b',Diabetes:'o',Cardiovascular:'r','Pain Reliever':'b',Allergy:'g',Gastroenterology:'b','Vitamin/Supplement':'g',Respiratory:'b',Dermatology:'p',Other:'b'};
- tb.innerHTML=data.map((item,i)=>{
-    const realIdx=DB.inventory.indexOf(item);
-    const isLow=item.stock<=(item.alertAt||10);
-    const expiryInfo=getExpiryInfo(item.expiry);
-    return`<tr id="inv-row-${realIdx}">
-      <td><b>${item.name}</b><br><span class="sp ${catColors[item.cat]||'b'}" style="margin-top:2px;font-size:10px">${item.cat||'—'}</span></td>
-      <td style="font-family:monospace;font-size:12px;color:var(--gray-400)">${item.batch||'—'}</td>
-      <td>${item.expiry?`<span class="etag ${expiryInfo.cls}">${expiryInfo.lbl}</span>`:'—'}</td>
-      <td style="${isLow?'color:var(--red);font-weight:700':''}"><b>${item.stock}</b> units${isLow?' ⚠':''}
-      </td>
-      <td>₱${(item.buy||0).toFixed(2)}</td>
-      <td style="font-weight:700;color:var(--blue)">₱${(item.sell||0).toFixed(2)}</td>
-      <td>${item.supplier||'—'}</td>
-      <td>${item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
-      <td><div style="display:flex;gap:5px;flex-wrap:nowrap">
-        <button class="btn btn-outline btn-sm" onclick="openEditMedModal(${realIdx})">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
-      </div></td>
+    tb.innerHTML = data.map((item,i)=>{
+  const realIdx = DB.inventory.indexOf(item);
+  const isLow = item.stock <= (item.alertAt || 10);
+  const expiryInfo = getExpiryInfo(item.expiry);
 
-    </tr>`;
-  }).join('');
+  return `
+    <tr id="inv-row-${realIdx}">
+      <td>
+        <b>${item.name}</b><br>
+        <span class="sp ${catColors[item.cat] || 'b'}"
+          style="margin-top:2px;font-size:10px">
+          ${item.cat || '—'}
+        </span>
+      </td>
+
+      <td style="font-family:monospace;font-size:12px;color:var(--gray-400)">
+        ${item.batch || '—'}
+      </td>
+
+      <td>
+        ${item.expiry
+          ? `<span class="etag ${expiryInfo.cls}">${expiryInfo.lbl}</span>`
+          : '—'}
+      </td>
+
+      <td style="${isLow ? 'color:var(--red);font-weight:700' : ''}">
+        <b>${item.stock}</b> units${isLow ? ' ⚠' : ''}
+      </td>
+
+      <td>₱${(item.buy || 0).toFixed(2)}</td>
+
+      <td style="font-weight:700;color:var(--blue)">
+        ₱${(item.sell || 0).toFixed(2)}
+      </td>
+
+      <td>${item.supplier || '—'}</td>
+
+      <td>
+        ${item.rx
+          ? '<span class="sp o">Rx</span>'
+          : '<span class="sp g">OTC</span>'}
+      </td>
+
+      <td>
+        <div style="display:flex;gap:5px;flex-wrap:nowrap">
+          <button class="btn btn-outline btn-sm"
+            onclick="openEditMedModal(${realIdx})">✏️</button>
+
+          <button class="btn btn-danger btn-sm"
+            onclick="confirmDelete('medicine',${realIdx})">🗑️</button>
+        </div>
+      </td>
+    </tr>
+  `;
+}).join('');
   // stats
   const low=DB.inventory.filter(i=>i.stock<=(i.alertAt||10)).length;
   const exp=DB.inventory.filter(i=>{if(!i.expiry)return false;const diff=(new Date(i.expiry)-new Date())/86400000;return diff>=0&&diff<=30;}).length;
