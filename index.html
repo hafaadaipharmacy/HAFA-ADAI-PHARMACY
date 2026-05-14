@@ -1260,8 +1260,8 @@ function renderInventory(data){
       <td>${item.expiry?`<span class="etag ${expiryInfo.cls}">${expiryInfo.lbl}</span>`:'—'}</td>
       <td style="${isLow?'color:var(--red);font-weight:700':''}"><b>${item.stock}</b> units${isLow?' ⚠':''}
       </td>
-      <td>$${(item.buy||0).toFixed(2)}</td>
-      <td style="font-weight:700;color:var(--blue)">$${(item.sell||0).toFixed(2)}</td>
+      <td>₱₱{(item.buy||0).toFixed(2)}</td>
+      <td style="font-weight:700;color:var(--blue)">₱₱{(item.sell||0).toFixed(2)}</td>
       <td>${item.supplier||'—'}</td>
       <td>${item.rx?'<span class="sp o">Rx</span>':'<span class="sp g">OTC</span>'}</td>
       <td><div style="display:flex;gap:5px;flex-wrap:nowrap">
