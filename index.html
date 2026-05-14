@@ -1274,7 +1274,7 @@ function renderInventory(data){
   document.getElementById('inv-total-count').textContent=DB.inventory.length;
   document.getElementById('inv-low-count').textContent=low;
   document.getElementById('inv-exp-count').textContent=exp;
-  document.getElementById('inv-val').textContent='$'+val.toFixed(0);
+  document.getElementById('inv-val').textContent='₱'+val.toFixed(0);
   document.getElementById('invSubtitle').textContent=`Showing ${data.length} of ${DB.inventory.length} items`;
   updateBadges();
 }
@@ -1707,7 +1707,7 @@ function selectCustomer(i){
     ${cTxns.length===0?'<div class="empty-state" style="padding:16px"><p>No purchases yet</p></div>':
     `<div style="overflow-x:auto"><table class="data-table">
       <thead><tr><th>Date</th><th>Invoice</th><th>Amount</th><th>Payment</th></tr></thead>
-      <tbody>${cTxns.slice(-5).reverse().map(t=>`<tr><td>${t.date}<br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-family:monospace;font-size:12px;color:var(--blue)">${t.invoice}</td><td style="font-weight:700;color:var(--blue)">$${t.total.toFixed(2)}</td><td><span class="sp g">${t.payment}</span></td></tr>`).join('')}
+      <tbody>${cTxns.slice(-5).reverse().map(t=>`<tr><td>${t.date}<br><span style="font-size:10px;color:var(--gray-400)">${t.time||''}</span></td><td style="font-family:monospace;font-size:12px;color:var(--blue)">${t.invoice}</td><td style="font-weight:700;color:var(--blue)">₱₱{t.total.toFixed(2)}</td><td><span class="sp g">${t.payment}</span></td></tr>`).join('')}
       </tbody></table></div>`}`;
 }
 function openAddCustModal(){
@@ -1823,7 +1823,7 @@ function renderPOs(){
   tb.innerHTML=DB.purchaseOrders.map((po,i)=>`
     <tr>
       <td style="font-family:monospace;color:var(--blue)">${po.ref}</td>
-      <td>${po.supplier}</td>
+      <td>₱{po.supplier}</td>
       <td>${po.date||'—'}</td>
       <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${po.items||''}">${po.items||'—'}</td>
       <td style="font-weight:700">$${parseFloat(po.total||0).toFixed(2)}</td>
